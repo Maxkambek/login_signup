@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="shadow p-5 mb-5 bg-body rounded">
+    <form method="post">
+    {% csrf_token %}
+        <h5>Sign up</h5>
+        <hr>
+        <label for="exampleInputEmail1" class="">Username</label>
+        <div class="mb-3">
+{#            <input class="form-control" type="email" id="exampleInputEmail1" aria-describedby="emailHelp">#}
+            {{ form.username }}
+        </div>
+        <label for="exampleInputEmail1" class="">Email</label>
+        <div class="mb-3">
+{#            <input class="form-control" type="email" id="exampleInputEmail1" aria-describedby="emailHelp">#}
+            {{ form.email }}
+        </div>
+        <label for="exampleInputPassword1" class="">Password</label>
+        <div class="mb-2">
+
+{#            <input class="form-control" type="password" id="exampleInputPassword1">#}
+            {{ form.password1 }}
+        </div>
+        <label for="exampleInputPassword1" class="">Confirm password</label>
+        <div class="mb-2">
+
+{#            <input class="form-control" type="password" id="exampleInputPassword1">#}
+            {{ form.password2 }}
+        </div>
+        <div class="mb-3">
+            <small>If you have an account, you will <a href="{% url 'login' %}">Sign in</a></small>
+        </div>
+        <div class="mb-3">
+            {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="mb-5 p-4 rounded-xl bg-red-300 text-dark">
+                    <small style="color: red;">{{ error|escape }}</small>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+            <button type="submit" class="btn btn-success">Register</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

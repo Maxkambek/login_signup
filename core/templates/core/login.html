@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Log in | {% endblock %}
+
+{% block content %}
+<div class="shadow p-5 mb-5 bg-body rounded">
+    <form method="post">
+        {% csrf_token %}
+        <h5>Sign in</h5>
+        <hr>
+        <label for="exampleInputEmail1" class="">Username</label>
+        <div class="mb-2">
+{#            <input class="form-control" type="text" id="exampleInputEmail1" aria-describedby="emailHelp">#}
+            {{ form.username }}
+        </div>
+        <label  for="exampleInputPassword1" class="mb-2">Password</label>
+        <div class="mb-3">
+
+{#            <input class="form-control" type="password" id="exampleInputPassword1">#}
+            {{ form.password }}
+        </div>
+        <div class="mb-3">
+            <small><a href="{% url 'password_reset' %}">Forgot password?</a></small>
+        </div>
+        <div class="mb-2">
+            <button type="submit" class="btn btn-success">Login</button>
+        </div>
+    </form>
+</div>
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="mb-5 p-4 rounded-xl bg-red-300 text-dark">
+                    <p>{{ error|escape }}</p>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
